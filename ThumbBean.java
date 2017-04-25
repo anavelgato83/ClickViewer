@@ -11,13 +11,13 @@ public class ThumbBean
     extends JComponent
     implements Serializable {
 
-  // ÇÁ·ÎÆÛÆ¼
-  protected String imageName; // path¿ë
+  // í”„ë¡œí¼í‹°
+  protected String imageName; // pathìš©
   protected int hgap;
   protected int vgap;
   protected String caption;
 
-  // ³»ºÎ º¯¼ö
+  // ë‚´ë¶€ ë³€ìˆ˜ (ì´ ë¶€ë¶„ ìˆ˜ì •)
   protected BufferedImage image;
 
   public ThumbBean() {
@@ -28,11 +28,11 @@ public class ThumbBean
     return imageName;
   }
 
-  // ÀÌ¹ÌÁö ÀÌ¸§ÀÌ ÁÖ¾îÁ³À»¶§, ÇØ´ç ÀÌ¹ÌÁöµµ ºó¿¡ Ãß°¡ÇÑ´Ù.
+  // ì´ë¯¸ì§€ ì´ë¦„ì´ ì£¼ì–´ì¡Œì„ë•Œ, í•´ë‹¹ ì´ë¯¸ì§€ë„ ë¹ˆì— ì¶”ê°€í•œë‹¤.
   public void setImageName(String imageName) {
     try {
       image = ImageIO.read(new File(imageName));
-      // Àı´ë ÆĞ½º·Î ÁÖ¾îÁø °æ¿ì¸¦ Ã³¸®ÇÑ´Ù.
+      // ì ˆëŒ€ íŒ¨ìŠ¤ë¡œ ì£¼ì–´ì§„ ê²½ìš°ë¥¼ ì²˜ë¦¬í•œë‹¤.
       int idx = imageName.lastIndexOf(File.separatorChar);
       if (idx != -1) {
         this.caption = imageName.substring(idx + 1);
@@ -44,7 +44,7 @@ public class ThumbBean
     catch (IOException e) {
       this.imageName = null;
       this.image = null;
-      this.caption = "ÇØ´ç ÀÌ¹ÌÁö ¾øÀ½";
+      this.caption = "í•´ë‹¹ ì´ë¯¸ì§€ ì—†ìŒ";
     }
     this.repaint();
   }
@@ -82,7 +82,7 @@ public class ThumbBean
     g.fill3DRect(0, 0, width - 1, height - 1, true);
 
     if (image != null) {
-      // ÀÌ¹ÌÁö °´Ã¼¸¦ »Ñ¸²
+      // ì´ë¯¸ì§€ ê°ì²´ë¥¼ ë¿Œë¦¼
       FontMetrics metrics = g.getFontMetrics();
       width = this.getWidth() - (hgap * 2);
       height = this.getHeight() - (vgap * 2) - metrics.getHeight() - 2;
@@ -90,9 +90,9 @@ public class ThumbBean
     }
     /**
      * @todo
-     * ¹®ÀÚ¿­ÀÇ Å©±â¸¦ Àç¼­, Áß¾Ó¿¡ À§Ä¡ÇÏ°í,
-     * 8ÀÚ ÀÌ»óÀÌ¸é "..." À¸·Î Ã³¸®ÇÏ¸é ´õ ÁÁ°ÚÁÒ ?
-     * µ¶ÀÚ ¿©·¯ºĞµéÀÌ ÇØº¸¼¼¿ä.
+     * ë¬¸ìì—´ì˜ í¬ê¸°ë¥¼ ì¬ì„œ, ì¤‘ì•™ì— ìœ„ì¹˜í•˜ê³ ,
+     * 8ì ì´ìƒì´ë©´ "..." ìœ¼ë¡œ ì²˜ë¦¬í•˜ë©´ ë” ì¢‹ê² ì£  ?
+     * ë…ì ì—¬ëŸ¬ë¶„ë“¤ì´ í•´ë³´ì„¸ìš”.
      */
     g.setColor(this.getForeground());
     g.drawString(caption, hgap, this.getHeight() - vgap);
